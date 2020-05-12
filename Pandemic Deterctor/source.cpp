@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+// User defined database to store the records of the patients consisting fields such as Disease, Patient_ID, Country_Name, State_Name, City_Name and Patient_State.
 class Database{
 	private:
 		string Disease;
@@ -9,6 +10,7 @@ class Database{
 		string City_Name;
 		string Patient_State;
 	public:
+	        // Created a Database constructor to initialize the database and enter the records to the database.
 		Database(){}
 		Database(string disease_name, string patient_id, string country_name, string state_name, string city_name, string patient_state){
 			Disease = disease_name;
@@ -18,26 +20,34 @@ class Database{
 			City_Name = city_name;
 			Patient_State = patient_state;
 		}
+	        // Function to return the Disease.
 		string getDisease(){
 			return Disease;
 		}
+	        // Function to return the Patient_ID.
 		string getPatientID(){
 			return Patient_ID;
 		}
+	        // Function to return the Country_Name.
 		string getCountryName(){
 			return Country_Name;
 		}
+	        // Function to return the State_Name.
 		string getStateName(){
 			return State_Name;
 		}
+	        // Function to return City_Name.
 		string getCityName(){
 			return City_Name;
 		}
+	        // Function to return Patient_State.
 		string getPatientState(){
 			return Patient_State;
 		}
 };
+// Table class to define utility functions related to our system.
 class Table{
+	// Initialized the database, the unique ID (Primary Key) as alNodb and other variables to keep track of already used diseasename, country and state to avoid duplication. 
 	private:
 		map<int, Database> db;
 		int slNodb = 1;
@@ -45,18 +55,11 @@ class Table{
 		string donecountry = "default";
 		string donestate = "default";
 	public:
-		void insertActiveData(string disease, string patient_id, string country_name, string state_name, string city_name, string patient_state){
+	        // Function to insert record to the database (ACTIVE CASE), (CURE CASE) or (FATALITY CASE).
+		void insertData(string disease, string patient_id, string country_name, string state_name, string city_name, string patient_state){
 			db.insert({slNodb++, Database(disease, patient_id, country_name, state_name, city_name, patient_state)});
 		}
-		void insertCureData(string disease, string patient_id, string country_name, string state_name, string city_name, string patient_state){
-			db.insert({slNodb++, Database(disease, patient_id, country_name, state_name, city_name, patient_state)});
-		}
-		void insertFatalityData(string disease, string patient_id, string country_name, string state_name, string city_name, string patient_state){
-		    db.insert({slNodb++, Database(disease, patient_id, country_name, state_name, city_name, patient_state)});
-		}
-		void insertDeathData(string disease, string patient_id, string country_name, string state_name, string city_name, string patient_state){
-		    db.insert({slNodb++, Database(disease, patient_id, country_name, state_name, city_name, patient_state)});
-		}
+	        // Function to know the world summary disease breakup.
 		void showWorldSummaryDiseasesBreakupUtil(string disease, int searchslNo){
 			int countActive = 0;
 			int countCured = 0;
@@ -83,6 +86,7 @@ class Table{
 				cout<<endl;
 			}
 		}
+	        // Function to know the country breakup.
 		int showCountryBreakupUtil(string country, int searchslNo, string disease, int check){
 			int countActive = 0;
 			int countCured = 0;
@@ -110,6 +114,7 @@ class Table{
 			}
 			return check;
 		}
+	        // Function to know the full world record summary.
 		void showWorldSummary(){
 			int countActive = 0;
 			int countCured = 0;
@@ -130,6 +135,7 @@ class Table{
 			cout<<"Fatality"<<" "<<countFatality<<endl;
 			cout<<"Total"<<" "<<countTotal<<endl;
 		}
+	        // Function to know the stte wise disease breakup.
 		int showStateBreakupUtil(string state, int searchslNo, string country, int check){
 			int countActive = 0;
 			int countCured = 0;
@@ -157,6 +163,7 @@ class Table{
 			}
 			return check;
 		}
+	        // Helper function to get the world summary breakup.
 		void showWorldSummaryDiseasesBreakup(){
 		    for(auto itr = db.begin(); itr != db.end(); itr++){
 				auto searchdisease = itr->second.getDisease();
@@ -164,6 +171,7 @@ class Table{
 				showWorldSummaryDiseasesBreakupUtil(searchdisease, searchslNo);
 			}
 		}
+	        // Function to get the country wise breakup.
 		void showCountryBreakup(string disease){
 		    int check = 0;
 		    for(auto itr = db.begin(); itr != db.end(); itr++){
@@ -180,6 +188,7 @@ class Table{
 		    if(check == 1)
 		       cout<<"No such Disease exists in the Country"<<endl; 
 		}
+	        // Function to get the state wise disease breakup.
 		void showStateBreakup(string disease, string country){
 		    int check = 0;
 		    for(auto itr = db.begin(); itr != db.end(); itr++){
@@ -197,12 +206,14 @@ class Table{
 		    if(check == 1)
 		        cout<<"No such Disease exists in the State"<<endl;
 		}
+	        // Function to get the complete database of the patients.
 		void showCompleteData(){
 			for(auto itr = db.begin(); itr != db.end(); itr++){
 				cout<<itr->second.getDisease()<<" "<<itr->second.getPatientID()<<" "<<itr->second.getCountryName()<<" "<<itr->second.getStateName()<<" "<<itr->second.getCityName()<<" "<<itr->second.getPatientState()<<endl;
 			}
 		}
 };
+// Driver function to check the above system.
 int main()
 {
     Table m;
@@ -235,7 +246,7 @@ int main()
     		cin>>statename;
     		cout<<"Enter CITY you want to report"<<endl;
     		cin>>cityname;
-    		m.insertActiveData(disease, patientid, country, statename, cityname, "Active");
+    		m.insertData(disease, patientid, country, statename, cityname, "Active");
     	}
     	else if(reportmenunumber == 2){
     		cout<<"*****Enter data of patient to report an CURE CASE*****"<<endl;
@@ -249,7 +260,7 @@ int main()
     		cin>>statename;
     		cout<<"Enter CITY you want to report"<<endl;
     		cin>>cityname;
-    		m.insertCureData(disease, patientid, country, statename, cityname, "Cure");
+    		m.insertData(disease, patientid, country, statename, cityname, "Cure");
     	}
     	else if(reportmenunumber == 3){
     		cout<<"*****Enter data of patient to report an FATALITY CASE*****"<<endl;
@@ -263,7 +274,7 @@ int main()
     		cin>>statename;
     		cout<<"Enter CITY you want to report"<<endl;
     		cin>>cityname;
-    		m.insertCureData(disease, patientid, country, statename, cityname, "Fatality");
+    		m.insertData(disease, patientid, country, statename, cityname, "Fatality");
     	}
     	cout<<"Do you wish to report more cases?, Type 0 to exit else 1 to continue"<<endl;
     	cin>>entryreport;

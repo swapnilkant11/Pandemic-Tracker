@@ -9,7 +9,7 @@ A pandemic tracker using OOPS concept in C++ using data structures and algorithm
 3. Assumed that the PATIENT ID is unique in a given city but may vary for different cities.
 4. Assumed the three different case of a patient during reporting of a case by the user, I have created three different cases for reporting a case which are,
    one where user can report a ACTIVE CASE, second where a user can report a CURED CASE and third where a user can report a FATALITY CASE.
-5. Assumed an extra field in the given form of test case which states the situation of the patient whether the case is ACTIVE, CURED
+5. Assumed an extra field called 'Patient_State' in the given form of test case which states the situation of the patient whether the case is ACTIVE, CURED
    or it's a case of FATALITY.
 6. Assumed that more than one case can be reported for a given state, city and country.
 

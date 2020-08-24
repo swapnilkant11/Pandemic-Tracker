@@ -1,6 +1,6 @@
 # Pandemic-Tracker Documentation
 
-A pandemic tracker using OOPS concept in C++ using data structures and algorithms.
+A pandemic tracker using OOPS concept in C++ using data structures and algorithms techniques.
 
 ## My assumptions while designing this system are:-
 
